@@ -15,21 +15,6 @@
       
 ```
 
-## Example
-
-```go
-
-      Domain:   "mailtrap",       // os.Getenv("MAIL_DOMAIN"),
-      Host:     "3.209.246.195",  // os.Getenv("MAIL_HOST"),
-      Port:     25,               // port,
-      Username: "c2c7de5dc360ec", // os.Getenv("MAIL_USERNAME"),
-      Password: "cc99f40ff334eb", // os.Getenv("MAIL_PASSWORD"),
-      // Encryption:  // os.Getenv("MAIL_ENCRYPTION"),
-      FromName:    "Fares Kato",      // os.Getenv("FROM_NAME"),
-      FromAddress: "fares@gmail.com", 
-    // os.Getenv("FROM_ADDRESS"),
-```
-
 - **2:** Create/Init the mailer
 
 ```go
