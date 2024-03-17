@@ -18,7 +18,7 @@
 - **2:** Create/Init the mailer
 
 ```go
-  mailer := CreateMail()
+  mailer := fkmailer.CreateMail()
 
 ```
 
@@ -26,7 +26,7 @@
 
 ```go
 
-  data := fkmail.TemplateDate{
+  data := fkmailer.TemplateData{
   Title:          "Welcome",
   Body:           "this is the body",
   AdditionalInfo: "Thank U",
@@ -37,7 +37,7 @@
 - **4:** Create the message(to be sent)
 
 ```go
- message := fkmailer.Message{
+ message := fkmailer.FKMessage{
   From:    "me@gmail.com",
   To:      "yo@gmail.com",
   Subject: "My first go mailer package",
