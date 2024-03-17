@@ -3,8 +3,6 @@ package fkmailer
 import (
 	"bytes"
 	"html/template"
-	"log"
-	"os"
 	"path/filepath"
 	"time"
 
@@ -71,13 +69,10 @@ func (m *fKMail) SendSMTPMessage(msg FKMessage, ccs []string) error {
 }
 
 func (m *fKMail) buildHTMLMessage(msg FKMessage) (string, error) {
-	currDir, err := os.Getwd()
-	if err != nil {
-		return "", err
-	}
+	fPath := filepath.Dir(".")
 
-	templateToRender := filepath.Join(currDir, "templates", "mail.gohtml")
-	log.Fatalln(templateToRender)
+	templateToRender := filepath.Join(fPath, "templates", "mail.gohtml")
+	color.Errorln(templateToRender)
 	t, err := template.New("email-html").ParseFiles(templateToRender)
 	if err != nil {
 		return "", err
