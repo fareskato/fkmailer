@@ -12,8 +12,9 @@ func init() {
 	err := godotenv.Load()
 	if err != nil {
 		color.Errorln("Error loading .env file")
+		os.Exit(1)
 	}
-	os.Exit(1)
+
 }
 
 /*
