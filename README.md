@@ -1,6 +1,6 @@
 # Mailer package
 
-- **1:** Set mailer server configs in .env file like so:
+- **1:** Set mailer server configs(all fileds are required) in .env file like so:
 
 ```.env
     
@@ -37,8 +37,15 @@
 - **4:** Create the message(to be sent)
 
 ```go
+/*
+
+ these message fileds if not provided will take the fields
+ of mailer(so they are optionals when set the message) 
+ From        string
+ FromName    string
+*/
  message := fkmailer.FKMessage{
-  From:    "me@gmail.com",
+  // From:    "me@gmail.com",
   To:      "yo@gmail.com",
   Subject: "My first go mailer package",
   Data:    data,
@@ -50,6 +57,34 @@
 
 ```go
   ccs := []string{"cc1@mail.com", "cc1@mail.com", ...etc}
+
+```
+
+- **Notice:** You can use custom template by adding this to .env file:
+CUSTOM_TPL= true
+then U need to create template folder at the root with mail.gohtml file
+like so:
+
+```go
+{{define "body"}}
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Message from System</title>
+    </head>
+
+    <body>
+    <!-- additional stuff -->
+      {{.Title}}
+      {{.Body}}
+      {{.AdditionalInfo}}
+      <!-- additional stuff -->
+    </body>
+</html>
+{{end}}
 
 ```
 

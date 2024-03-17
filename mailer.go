@@ -4,8 +4,10 @@ import (
 	"bytes"
 	"errors"
 	"html/template"
+	"os"
 	"path/filepath"
 	"runtime"
+	"strconv"
 	"time"
 
 	"github.com/gookit/color"
@@ -71,11 +73,26 @@ func (m *fKMail) SendSMTPMessage(msg FKMessage, ccs []string) error {
 }
 
 func (m *fKMail) buildHTMLMessage(msg FKMessage) (string, error) {
-	_, filename, _, ok := runtime.Caller(0)
-	if !ok {
-		return "", errors.New("failed to determine mailer template file path")
+	var dir string
+	customTplStr := os.Getenv("CUSTOM_TPL")
+	isCustomTpl, err := strconv.ParseBool(customTplStr)
+	if err != nil {
+		return "", err
 	}
-	dir := filepath.Dir(filename)
+	if isCustomTpl {
+		wd, err := os.Getwd()
+		if err != nil {
+			return "", err
+		}
+		dir = wd
+	} else {
+		_, filename, _, ok := runtime.Caller(0)
+		if !ok {
+			return "", errors.New("failed to determine mailer template file path")
+		}
+		dir = filepath.Dir(filename)
+	}
+
 	templateToRender := filepath.Join(dir, "templates", "mail.gohtml")
 	t, err := template.New("email-html").ParseFiles(templateToRender)
 	if err != nil {
