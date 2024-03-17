@@ -12,6 +12,7 @@
       MAIL_ENCRYPTION:"encryption"
       MAIL_FROM_NAME="Me"
       MAIL_FROM_ADDRESS="myaddress@mail.com"
+      CUSTOM_TPL=false/true
       
 ```
 
